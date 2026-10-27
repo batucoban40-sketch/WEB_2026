@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Wiki</title>
+    <style>
+        html {
+    scroll-behavior: smooth;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #111116;
+            color: #eeeeee;
+        }
+
+        header {
+            background: #1b1b24;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 2px solid #8b5cf6;
+        }
+
+        header h1 {
+            color: #a78bfa;
+            font-size: 32px;
+        }
+
+        nav {
+            background: #20202b;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #a78bfa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            background: #1b1b24;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        h2 {
+            color: #a78bfa;
+            margin-bottom: 15px;
+        }
+
+        .anime-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .anime-card {
+            background: #1b1b24;
+            padding: 22px;
+            border-radius: 10px;
+            border: 1px solid #333340;
+            transition: 0.3s;
+        }
+
+        .anime-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-4px);
+        }
+
+        .anime-card h3 {
+            color: #c4b5fd;
+            margin-bottom: 10px;
+        }
+
+        .anime-card p {
+            color: #c4c4d0;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #39275b;
+            color: #ddd0ff;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .characters {
+            margin-top: 35px;
+            background: #1b1b24;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .characters ul {
+            padding-left: 20px;
+            line-height: 2;
+        }
+
+        footer {
+            text-align: center;
+            background: #1b1b24;
+            color: #9999a8;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        a {
+            color: #c4b5fd;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Anime Wiki</h1>
+        <p>Anime dünyasının bilgi arşivi</p>
+    </header>
+
+    <nav>
+        <a href="#son">Sona Git ↓</a>
+        <a href="#anasayfa">Ana Sayfa</a>
+        <a href="#animeler">Animeler</a>
+        <a href="#karakterler">Karakterler</a>
+        <a href="#hakkinda">Hakkında</a>
+    </nav>
+
+    <main class="container">
+
+        <section class="welcome" id="anasayfa">
+            <h2>Anime Wiki'ye Hoş Geldin!</h2>
+            <p>
+                En sevdiğin animeler, karakterler, özel güçler
+                ve anime evrenleri hakkında bilgi edin.
+                Anime dünyasını keşfetmeye hemen başla!
+            </p>
+        </section>
+
+        <section id="animeler">
+            <h2>Popüler Animeler</h2>
+
+            <div class="anime-list">
+
+                <article class="anime-card">
+                    <h3>Naruto</h3>
+                    <p>
+                        Hokage olmayı hayal eden Naruto Uzumaki'nin
+                        ninja dünyasındaki macerası.
+                    </p>
+                    <span class="tag">Aksiyon</span>
+                    <span class="tag">Macera</span>
+                </article>
+
+                <article class="anime-card">
+                    <h3>One Piece</h3>
+                    <p>
+                        Monkey D. Luffy ve ekibinin efsanevi
+                        One Piece hazinesini arayışı.
+                    </p>
+                    <span class="tag">Macera</span>
+                    <span class="tag">Fantastik</span>
+                </article>
+
+                <article class="anime-card">
+                    <h3>Dragon Ball</h3>
+                    <p>
+                        Goku'nun güçlü rakiplerle savaştığı ve
+                        sürekli daha güçlü olmaya çalıştığı evren.
+                    </p>
+                    <span class="tag">Dövüş</span>
+                    <span class="tag">Aksiyon</span>
+                </article>
+
+                <article class="anime-card">
+                    <h3>Jujutsu Kaisen</h3>
+                    <p>
+                        Yuji Itadori'nin lanetler ve büyücülerle
+                        dolu tehlikeli dünyadaki hikâyesi.
+                    </p>
+                    <span class="tag">Karanlık Fantastik</span>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="characters" id="karakterler">
+            <h2>Öne Çıkan Karakterler</h2>
+
+            <ul>
+                <li><strong>Naruto Uzumaki:</strong> Ninja, Uzumaki klanı.</li>
+                <li><strong>Monkey D. Luffy:</strong> Korsan, Hasır Şapka ekibi.</li>
+                <li><strong>Son Goku:</strong> Saiyan savaşçısı.</li>
+                <li><strong>Yuji Itadori:</strong> Jujutsu büyücüsü.</li>
+                <li><strong>Sasuke Uchiha:</strong> Uchiha klanından ninja.</li>
+            </ul>
+        </section>
+
+        <section class="characters" id="hakkinda">
+            <h2>Wiki Hakkında</h2>
+            <p>
+                Anime Wiki, anime serileri ve karakterleri hakkında
+                bilgiler sunmak amacıyla hazırlanmış örnek bir web
+                sitesidir. Yeni animeler ve karakterler ekleyerek
+                bu arşivi genişletebilirsin.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Anime Wiki &copy; 2026 | Tüm hakları saklıdır.</p>
+    </footer>
+    <div id="son" style="text-align:center; padding:25px;">
+    <a href="#anasayfa" style="
+        display:inline-block;
+        background:#8b5cf6;
+        color:white;
+        padding:12px 24px;
+        border-radius:8px;
+        text-decoration:none;
+        font-weight:bold;
+    ">↑ Başa Git</a>
+</div>
+
+</body>
+</html>
