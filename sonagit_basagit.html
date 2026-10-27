@@ -2,248 +2,549 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Wiki</title>
-    <style>
-        html {
-    scroll-behavior: smooth;
-}
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #111116;
-            color: #eeeeee;
-        }
-
-        header {
-            background: #1b1b24;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 2px solid #8b5cf6;
-        }
-
-        header h1 {
-            color: #a78bfa;
-            font-size: 32px;
-        }
-
-        nav {
-            background: #20202b;
-            padding: 15px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 12px;
-            font-size: 15px;
-        }
-
-        nav a:hover {
-            color: #a78bfa;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-
-        .welcome {
-            background: #1b1b24;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 4px solid #8b5cf6;
-        }
-
-        h2 {
-            color: #a78bfa;
-            margin-bottom: 15px;
-        }
-
-        .anime-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .anime-card {
-            background: #1b1b24;
-            padding: 22px;
-            border-radius: 10px;
-            border: 1px solid #333340;
-            transition: 0.3s;
-        }
-
-        .anime-card:hover {
-            border-color: #8b5cf6;
-            transform: translateY(-4px);
-        }
-
-        .anime-card h3 {
-            color: #c4b5fd;
-            margin-bottom: 10px;
-        }
-
-        .anime-card p {
-            color: #c4c4d0;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .tag {
-            display: inline-block;
-            background: #39275b;
-            color: #ddd0ff;
-            padding: 5px 9px;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-
-        .characters {
-            margin-top: 35px;
-            background: #1b1b24;
-            padding: 25px;
-            border-radius: 10px;
-        }
-
-        .characters ul {
-            padding-left: 20px;
-            line-height: 2;
-        }
-
-        footer {
-            text-align: center;
-            background: #1b1b24;
-            color: #9999a8;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        a {
-            color: #c4b5fd;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Wiki | Anime Ansiklopedisi</title>
+<style>
+*{box-sizing:border-box;scroll-behavior:smooth}
+:root{--bg:#0b0b12;--panel:#141420;--purple:#a855f7;--text:#eeeaf6;--muted:#aaa3bb}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;line-height:1.7}
+a{color:#c99aff;text-decoration:none}
+a:hover{color:white}
+header{background:#10101bee;border-bottom:1px solid #29243a;position:sticky;top:0;z-index:10;backdrop-filter:blur(12px)}
+.nav{max-width:1250px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:bold;color:white}
+.logo span{color:var(--purple)}
+nav{display:flex;gap:17px;flex-wrap:wrap;font-size:14px}
+nav a{color:#ddd5ee}
+.hero{min-height:410px;padding:75px 22px;display:flex;align-items:center;background:linear-gradient(90deg,#100b20 0%,#17102bdc 50%,#0b0b1280),radial-gradient(ellipse at 80% 30%,#7726b5 0%,#20132f 35%,#0b0b12 75%)}
+.hero-inner{max-width:1200px;width:100%;margin:auto}
+.eyebrow{color:#d8aaff;letter-spacing:4px;font-size:12px;font-weight:bold}
+h1{font-size:clamp(38px,6vw,70px);line-height:1.12;margin:16px 0}
+.hero p{max-width:650px;color:#d0c6df}
+button,.button{border:0;cursor:pointer;border-radius:8px;padding:12px 18px;background:var(--purple);color:white;font-weight:bold;font-size:14px}
+button:hover,.button:hover{filter:brightness(1.2)}
+.button.secondary{background:#252137;border:1px solid #403454}
+.wrap{max-width:1200px;margin:auto;padding:35px 22px}
+.section-title{font-size:28px;margin:0 0 8px}
+.subtitle{color:var(--muted);margin:0 0 24px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:-25px;position:relative}
+.stat,.card,.info-box,.character,.timeline-item{background:var(--panel);border:1px solid #282438;border-radius:12px}
+.stat{padding:20px;text-align:center}
+.stat strong{display:block;color:#d3a1ff;font-size:27px}
+.stat span{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{overflow:hidden;transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:#8353ad}
+.poster{height:145px;display:flex;align-items:center;justify-content:center;font-size:47px;background:linear-gradient(135deg,#241039,#45205f,#151323)}
+.poster.blue{background:linear-gradient(135deg,#0d243a,#205a75,#121522)}
+.poster.red{background:linear-gradient(135deg,#40171f,#8b343e,#18121d)}
+.poster.gold{background:linear-gradient(135deg,#483519,#8b7136,#191521)}
+.poster.green{background:linear-gradient(135deg,#14362c,#34755b,#141521)}
+.poster.pink{background:linear-gradient(135deg,#471c42,#934b86,#191321)}
+.card-body{padding:18px}
+.card h3{margin:0 0 8px;font-size:19px}
+.card p{color:var(--muted);font-size:14px;margin:0 0 12px}
+.tag{display:inline-block;background:#292039;color:#d9b7ff;padding:3px 9px;border-radius:20px;font-size:11px;margin:3px 3px 3px 0}
+.searchbar{width:100%;padding:14px 16px;background:#151420;color:white;border:1px solid #393148;border-radius:9px;font-size:15px;margin:8px 0 18px;outline:none}
+.searchbar:focus{border-color:var(--purple)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filters button{background:#211d2d;border:1px solid #393047}
+.filters button.active{background:var(--purple)}
+.columns{display:grid;grid-template-columns:2fr 1fr;gap:22px}
+.info-box{padding:22px;margin-bottom:18px}
+.info-box h3{margin-top:0;color:#d5a8ff}
+.character{padding:17px;display:flex;gap:15px;align-items:center}
+.avatar{width:60px;height:60px;flex-shrink:0;border-radius:12px;background:linear-gradient(135deg,#472365,#a855f7);display:grid;place-items:center;font-size:26px}
+.character p{margin:3px 0;color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid #30283b}
+th{color:#d5a8ff;background:#191522}
+tr:hover td{background:#171421}
+.timeline{border-left:2px solid #74449b;padding-left:22px}
+.timeline-item{padding:17px;margin-bottom:17px;position:relative}
+.timeline-item:before{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#b76cff;left:-29px;top:25px}
+.timeline-item h3{margin:0;color:#d7aaff}
+.timeline-item p{margin-bottom:0;color:var(--muted)}
+.article{background:#11111b;border:1px solid #292439;border-radius:12px;padding:24px;margin:18px 0}
+.article h3{color:#d3a1ff}
+.article p{color:#c6bfd2}
+footer{background:#101019;border-top:1px solid #30263e;text-align:center;padding:40px 20px;color:var(--muted)}
+.top-button{position:fixed;right:20px;bottom:20px;z-index:20;box-shadow:0 5px 25px #0008}
+#end{padding-top:20px}
+.hidden{display:none!important}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}.columns{grid-template-columns:1fr}.nav{justify-content:center}nav{justify-content:center}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding:50px 20px}.wrap{padding:28px 16px}nav{gap:10px}.logo{width:100%;text-align:center}}
+</style>
 </head>
-<body>
+<body id="top">
 
-    <header>
-        <h1>Anime Wiki</h1>
-        <p>Anime dünyasının bilgi arşivi</p>
-    </header>
+<header>
+ <div class="nav">
+  <a class="logo" href="#top">ANIME<span>WIKI</span></a>
+  <nav>
+   <a href="#anime">Animeler</a>
+   <a href="#karakterler">Karakterler</a>
+   <a href="#turler">Türler</a>
+   <a href="#rehber">Rehber</a>
+   <a href="#tarihce">Tarihçe</a>
+  </nav>
+  <button onclick="location.href='#end'">Sona Git ↓</button>
+ </div>
+</header>
 
-    <nav>
-        <a href="#son">Sona Git ↓</a>
-        <a href="#anasayfa">Ana Sayfa</a>
-        <a href="#animeler">Animeler</a>
-        <a href="#karakterler">Karakterler</a>
-        <a href="#hakkinda">Hakkında</a>
-    </nav>
+<section class="hero">
+ <div class="hero-inner">
+  <div class="eyebrow">ANİME DÜNYASINA HOŞ GELDİN</div>
+  <h1>Anime evrenini<br>keşfet.</h1>
+  <p>En sevdiğin animeler, unutulmaz karakterler, özel güçler, hikâyeler ve anime kültürü hakkında kapsamlı bir ansiklopedi. Yeni dünyalar keşfetmeye hazır mısın?</p>
+  <a class="button" href="#anime">Animeleri Keşfet</a>
+  <a class="button secondary" href="#karakterler">Karakterlere Bak</a>
+ </div>
+</section>
 
-    <main class="container">
-
-        <section class="welcome" id="anasayfa">
-            <h2>Anime Wiki'ye Hoş Geldin!</h2>
-            <p>
-                En sevdiğin animeler, karakterler, özel güçler
-                ve anime evrenleri hakkında bilgi edin.
-                Anime dünyasını keşfetmeye hemen başla!
-            </p>
-        </section>
-
-        <section id="animeler">
-            <h2>Popüler Animeler</h2>
-
-            <div class="anime-list">
-
-                <article class="anime-card">
-                    <h3>Naruto</h3>
-                    <p>
-                        Hokage olmayı hayal eden Naruto Uzumaki'nin
-                        ninja dünyasındaki macerası.
-                    </p>
-                    <span class="tag">Aksiyon</span>
-                    <span class="tag">Macera</span>
-                </article>
-
-                <article class="anime-card">
-                    <h3>One Piece</h3>
-                    <p>
-                        Monkey D. Luffy ve ekibinin efsanevi
-                        One Piece hazinesini arayışı.
-                    </p>
-                    <span class="tag">Macera</span>
-                    <span class="tag">Fantastik</span>
-                </article>
-
-                <article class="anime-card">
-                    <h3>Dragon Ball</h3>
-                    <p>
-                        Goku'nun güçlü rakiplerle savaştığı ve
-                        sürekli daha güçlü olmaya çalıştığı evren.
-                    </p>
-                    <span class="tag">Dövüş</span>
-                    <span class="tag">Aksiyon</span>
-                </article>
-
-                <article class="anime-card">
-                    <h3>Jujutsu Kaisen</h3>
-                    <p>
-                        Yuji Itadori'nin lanetler ve büyücülerle
-                        dolu tehlikeli dünyadaki hikâyesi.
-                    </p>
-                    <span class="tag">Karanlık Fantastik</span>
-                </article>
-
-            </div>
-        </section>
-
-        <section class="characters" id="karakterler">
-            <h2>Öne Çıkan Karakterler</h2>
-
-            <ul>
-                <li><strong>Naruto Uzumaki:</strong> Ninja, Uzumaki klanı.</li>
-                <li><strong>Monkey D. Luffy:</strong> Korsan, Hasır Şapka ekibi.</li>
-                <li><strong>Son Goku:</strong> Saiyan savaşçısı.</li>
-                <li><strong>Yuji Itadori:</strong> Jujutsu büyücüsü.</li>
-                <li><strong>Sasuke Uchiha:</strong> Uchiha klanından ninja.</li>
-            </ul>
-        </section>
-
-        <section class="characters" id="hakkinda">
-            <h2>Wiki Hakkında</h2>
-            <p>
-                Anime Wiki, anime serileri ve karakterleri hakkında
-                bilgiler sunmak amacıyla hazırlanmış örnek bir web
-                sitesidir. Yeni animeler ve karakterler ekleyerek
-                bu arşivi genişletebilirsin.
-            </p>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>Anime Wiki &copy; 2026 | Tüm hakları saklıdır.</p>
-    </footer>
-    <div id="son" style="text-align:center; padding:25px;">
-    <a href="#anasayfa" style="
-        display:inline-block;
-        background:#8b5cf6;
-        color:white;
-        padding:12px 24px;
-        border-radius:8px;
-        text-decoration:none;
-        font-weight:bold;
-    ">↑ Bro niye buraya geldin</a>
+<main>
+<div class="wrap">
+ <div class="stats">
+  <div class="stat"><strong>50+</strong><span>Keşfedilecek anime</span></div>
+  <div class="stat"><strong>100+</strong><span>Karakter bilgisi</span></div>
+  <div class="stat"><strong>12</strong><span>Farklı anime türü</span></div>
+  <div class="stat"><strong>∞</strong><span>Keşfedilecek evren</span></div>
+ </div>
 </div>
+
+<section class="wrap" id="anime">
+ <h2 class="section-title">Anime Ansiklopedisi</h2>
+ <p class="subtitle">Anime ara, türlere göre filtrele ve yeni seriler keşfet.</p>
+ <input id="search" class="searchbar" placeholder="Anime adı veya açıklama ara..." oninput="filterAnime()">
+ <div class="filters" id="filters">
+  <button class="active" onclick="setFilter('Tümü',this)">Tümü</button>
+  <button onclick="setFilter('Aksiyon',this)">Aksiyon</button>
+  <button onclick="setFilter('Fantastik',this)">Fantastik</button>
+  <button onclick="setFilter('Macera',this)">Macera</button>
+  <button onclick="setFilter('Bilim Kurgu',this)">Bilim Kurgu</button>
+  <button onclick="setFilter('Dram',this)">Dram</button>
+  <button onclick="setFilter('Spor',this)">Spor</button>
+  <button onclick="setFilter('Romantizm',this)">Romantizm</button>
+ </div>
+ <div class="grid" id="animeGrid">
+
+  <article class="card" data-name="one piece korsan macera aksiyon">
+   <div class="poster blue">☠️</div><div class="card-body">
+    <h3>One Piece</h3><p>Monkey D. Luffy ve tayfasının efsanevi hazineyi bulmak için çıktığı büyük deniz yolculuğu.</p>
+    <span class="tag">Macera</span><span class="tag">Aksiyon</span><span class="tag">Shounen</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="naruto ninja aksiyon">
+   <div class="poster">🍥</div><div class="card-body">
+    <h3>Naruto</h3><p>Hokage olmayı hayal eden Naruto'nun dostluk, mücadele ve kendini kanıtlama hikâyesi.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Ninja</span><span class="tag">Macera</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="bleach ruhlar aksiyon fantastik">
+   <div class="poster red">⚔️</div><div class="card-body">
+    <h3>Bleach</h3><p>Ichigo Kurosaki, ruhları görebilme yeteneği sayesinde Ruh Biçici dünyasına adım atar.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Fantastik</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="dragon ball z savaş aksiyon">
+   <div class="poster gold">🐉</div><div class="card-body">
+    <h3>Dragon Ball Z</h3><p>Goku ve dostları, dünyayı ve evreni tehdit eden güçlü düşmanlara karşı savaşır.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Bilim Kurgu</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="jujutsu kaisen lanet aksiyon fantastik">
+   <div class="poster pink">👁️</div><div class="card-body">
+    <h3>Jujutsu Kaisen</h3><p>Yuji Itadori, lanetlerle dolu tehlikeli bir dünyanın içine sürüklenir.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Fantastik</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="demon slayer iblis aksiyon fantastik">
+   <div class="poster green">🌊</div><div class="card-body">
+    <h3>Demon Slayer</h3><p>Tanjiro, ailesinin başına gelen trajedinin ardından iblislerle savaşmaya başlar.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Fantastik</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="attack on titan devler dram aksiyon">
+   <div class="poster red">🛡️</div><div class="card-body">
+    <h3>Attack on Titan</h3><p>İnsanlık, devlerin tehdidine karşı yüksek duvarların ardında hayatta kalmaya çalışır.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="fullmetal alchemist fantastik dram">
+   <div class="poster gold">⚗️</div><div class="card-body">
+    <h3>Fullmetal Alchemist: Brotherhood</h3><p>İki kardeş, kaybettiklerini geri kazanmak için simya ve fedakârlıklarla dolu bir yolculuğa çıkar.</p>
+    <span class="tag">Fantastik</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="hunter x hunter avcı macera aksiyon">
+   <div class="poster green">🎣</div><div class="card-body">
+    <h3>Hunter x Hunter</h3><p>Gon Freecss, babasını bulmak ve güçlü bir avcı olmak için yola çıkar.</p>
+    <span class="tag">Macera</span><span class="tag">Aksiyon</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="death note dedektif gerilim">
+   <div class="poster">📓</div><div class="card-body">
+    <h3>Death Note</h3><p>Light Yagami, ölümcül bir defter bulduğunda adalet kavramı büyük bir çatışmaya dönüşür.</p>
+    <span class="tag">Gerilim</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="sword art online bilim kurgu macera">
+   <div class="poster blue">🎮</div><div class="card-body">
+    <h3>Sword Art Online</h3><p>Oyuncuların sanal dünyadan çıkamadığı bir oyunda hayatta kalma mücadelesi başlar.</p>
+    <span class="tag">Bilim Kurgu</span><span class="tag">Macera</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="re zero fantastik dram">
+   <div class="poster pink">⌛</div><div class="card-body">
+    <h3>Re:Zero</h3><p>Subaru, fantastik bir dünyada zaman döngüsüyle bağlantılı zorlu bir kaderle karşılaşır.</p>
+    <span class="tag">Fantastik</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="mushoku tensei isekai fantastik">
+   <div class="poster gold">✨</div><div class="card-body">
+    <h3>Mushoku Tensei</h3><p>Rudeus, büyü ve macerayla dolu yeni bir hayatta geçmişteki hatalarını düzeltmeye çalışır.</p>
+    <span class="tag">Fantastik</span><span class="tag">Macera</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="frieren fantastik macera">
+   <div class="poster green">🌿</div><div class="card-body">
+    <h3>Frieren: Beyond Journey's End</h3><p>Uzun ömürlü bir elf büyücü, geçmiş yolculuğunun ardından insanları daha iyi anlamayı öğrenir.</p>
+    <span class="tag">Fantastik</span><span class="tag">Macera</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="haikyuu voleybol spor">
+   <div class="poster gold">🏐</div><div class="card-body">
+    <h3>Haikyuu!!</h3><p>Hinata ve Karasuno takımı, voleybol sahasında rakiplerini aşmak için çalışır.</p>
+    <span class="tag">Spor</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="blue lock futbol spor">
+   <div class="poster blue">⚽</div><div class="card-body">
+    <h3>Blue Lock</h3><p>Genç futbolcular, Japonya'nın en iyi golcüsü olmak için zorlu bir programa katılır.</p>
+    <span class="tag">Spor</span><span class="tag">Rekabet</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="your lie in april romantizm dram müzik">
+   <div class="poster pink">🎹</div><div class="card-body">
+    <h3>Your Lie in April</h3><p>Bir piyanist, yetenekli bir kemancı sayesinde müziğe yeniden yaklaşır.</p>
+    <span class="tag">Romantizm</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="horimiya romantizm okul">
+   <div class="poster pink">💗</div><div class="card-body">
+    <h3>Horimiya</h3><p>Birbirlerinden farklı görünen iki lise öğrencisi, birbirlerinin gerçek yönlerini keşfeder.</p>
+    <span class="tag">Romantizm</span><span class="tag">Okul</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="steins gate bilim kurgu zaman">
+   <div class="poster blue">⏳</div><div class="card-body">
+    <h3>Steins;Gate</h3><p>Bir grup arkadaşın deneyleri, zaman ve neden-sonuç ilişkisini tehlikeli biçimde değiştirir.</p>
+    <span class="tag">Bilim Kurgu</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="code geass mecha bilim kurgu">
+   <div class="poster red">♟️</div><div class="card-body">
+    <h3>Code Geass</h3><p>Lelouch, özel bir güç elde ettikten sonra imparatorluğa karşı planlar yapar.</p>
+    <span class="tag">Bilim Kurgu</span><span class="tag">Strateji</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="mob psycho 100 aksiyon komedi">
+   <div class="poster">💥</div><div class="card-body">
+    <h3>Mob Psycho 100</h3><p>Olağanüstü psişik güçlere sahip Mob, normal bir hayat sürmeye çalışır.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Komedi</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="one punch man aksiyon komedi">
+   <div class="poster gold">👊</div><div class="card-body">
+    <h3>One Punch Man</h3><p>Saitama, tek yumrukla rakiplerini yenebilecek kadar güçlü bir kahramandır.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Komedi</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="vinland saga tarih dram">
+   <div class="poster red">🪓</div><div class="card-body">
+    <h3>Vinland Saga</h3><p>Vikingler döneminde Thorfinn'in intikam, savaş ve anlam arayışı anlatılır.</p>
+    <span class="tag">Tarih</span><span class="tag">Dram</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="kingdom savaş tarih">
+   <div class="poster gold">🏯</div><div class="card-body">
+    <h3>Kingdom</h3><p>Antik Çin'de Shin, büyük bir general olmayı ve ülkenin birleşmesini hayal eder.</p>
+    <span class="tag">Savaş</span><span class="tag">Tarih</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="classroom of the elite okul dram">
+   <div class="poster">♟️</div><div class="card-body">
+    <h3>Classroom of the Elite</h3><p>Öğrencilerin zekâ, strateji ve rekabet yoluyla ilerlediği seçkin bir okul.</p>
+    <span class="tag">Okul</span><span class="tag">Psikolojik</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="chitose kun wa ramune romantizm okul">
+   <div class="poster pink">🌸</div><div class="card-body">
+    <h3>Chitose-kun wa Ramune Bin no Naka</h3><p>Popüler bir lise öğrencisinin arkadaşlıkları ve okul yaşamı etrafında gelişen romantik hikâye.</p>
+    <span class="tag">Romantizm</span><span class="tag">Okul</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="naruto shippuden ninja aksiyon">
+   <div class="poster blue">🔥</div><div class="card-body">
+    <h3>Naruto Shippuden</h3><p>Naruto'nun büyüyen sorumlulukları, arkadaşları ve büyük ninja savaşları.</p>
+    <span class="tag">Aksiyon</span><span class="tag">Macera</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="black clover büyü fantastik">
+   <div class="poster green">🍀</div><div class="card-body">
+    <h3>Black Clover</h3><p>Büyüsü olmayan Asta, Büyücü Kral olabilmek için azimle mücadele eder.</p>
+    <span class="tag">Fantastik</span><span class="tag">Aksiyon</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="fairy tail büyü fantastik macera">
+   <div class="poster gold">✨</div><div class="card-body">
+    <h3>Fairy Tail</h3><p>Bir büyücü loncasındaki dostluklar, görevler ve büyük savaşlar.</p>
+    <span class="tag">Fantastik</span><span class="tag">Macera</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="dr stone bilim kurgu">
+   <div class="poster green">🧪</div><div class="card-body">
+    <h3>Dr. Stone</h3><p>Senku, bilim bilgisini kullanarak taşlaşmış insanlığın uygarlığını yeniden kurmaya çalışır.</p>
+    <span class="tag">Bilim Kurgu</span><span class="tag">Macera</span>
+   </div>
+  </article>
+
+  <article class="card" data-name="spy x family komedi aksiyon">
+   <div class="poster pink">🕵️</div><div class="card-body">
+    <h3>Spy x Family</h3><p>Gizli görev yürüten bir casus, görevini tamamlamak için sıra dışı bir aile kurar.</p>
+    <span class="tag">Komedi</span><span class="tag">Aksiyon</span>
+   </div>
+  </article>
+ </div>
+ <p id="noResults" class="hidden">Bu aramayla eşleşen anime bulunamadı.</p>
+</section>
+
+<section class="wrap" id="karakterler">
+ <h2 class="section-title">Karakter Ansiklopedisi</h2>
+ <p class="subtitle">Anime dünyalarının öne çıkan kahramanları ve özellikleri.</p>
+ <div class="grid">
+  <div class="character"><div class="avatar">☠️</div><div><h3>Luffy</h3><p>One Piece · Korsan kaptanı</p><span class="tag">Lastik güçleri</span></div></div>
+  <div class="character"><div class="avatar">🍥</div><div><h3>Naruto Uzumaki</h3><p>Naruto · Ninja</p><span class="tag">Gölge klonları</span></div></div>
+  <div class="character"><div class="avatar">⚔️</div><div><h3>Ichigo Kurosaki</h3><p>Bleach · Ruh Biçici</p><span class="tag">Zanpakuto</span></div></div>
+  <div class="character"><div class="avatar">🐉</div><div><h3>Son Goku</h3><p>Dragon Ball · Saiyan</p><span class="tag">Ki</span></div></div>
+  <div class="character"><div class="avatar">👁️</div><div><h3>Satoru Gojo</h3><p>Jujutsu Kaisen · Büyücü</p><span class="tag">Altı Göz</span></div></div>
+  <div class="character"><div class="avatar">🔥</div><div><h3>Tanjiro Kamado</h3><p>Demon Slayer · İblis avcısı</p><span class="tag">Nefes teknikleri</span></div></div>
+  <div class="character"><div class="avatar">⚡</div><div><h3>Killua Zoldyck</h3><p>Hunter x Hunter · Avcı</p><span class="tag">Elektrik</span></div></div>
+  <div class="character"><div class="avatar">🌀</div><div><h3>Saitama</h3><p>One Punch Man · Kahraman</p><span class="tag">Fiziksel güç</span></div></div>
+  <div class="character"><div class="avatar">♟️</div><div><h3>Lelouch</h3><p>Code Geass · Stratejist</p><span class="tag">Geass</span></div></div>
+ </div>
+
+ <div class="article">
+  <h3>Karakter güçleri nasıl değerlendirilir?</h3>
+  <p>Anime karakterlerini karşılaştırırken yalnızca fiziksel güçlerine bakmak yeterli değildir. Hız, dayanıklılık, özel yetenekler, savaş deneyimi, zekâ ve yeteneklerin sınırları da dikkate alınmalıdır.</p>
+  <p>Bir karakter kendi evreninde çok güçlü olsa bile başka bir evrenin kuralları altında aynı sonucu elde edemeyebilir. Bu nedenle güç karşılaştırmaları, kullanılan varsayımlara göre değişebilir.</p>
+ </div>
+</section>
+
+<section class="wrap" id="turler">
+ <h2 class="section-title">Anime Türleri Rehberi</h2>
+ <p class="subtitle">Anime izlerken karşına çıkabilecek temel türler.</p>
+ <div class="grid">
+  <div class="card"><div class="card-body"><h3>⚔️ Aksiyon</h3><p>Çatışmalar, dövüşler, yüksek tempolu mücadeleler ve tehlikeli görevler.</p><span class="tag">Örnek: Bleach</span></div></div>
+  <div class="card"><div class="card-body"><h3>🐉 Fantastik</h3><p>Büyü, efsanevi yaratıklar, farklı dünyalar ve doğaüstü olaylar.</p><span class="tag">Örnek: Frieren</span></div></div>
+  <div class="card"><div class="card-body"><h3>🚀 Bilim Kurgu</h3><p>Gelecek teknolojileri, uzay, robotlar ve bilimsel fikirler.</p><span class="tag">Örnek: Steins;Gate</span></div></div>
+  <div class="card"><div class="card-body"><h3>💗 Romantizm</h3><p>Karakterlerin ilişkileri, duyguları ve birbirlerini tanıma süreçleri.</p><span class="tag">Örnek: Horimiya</span></div></div>
+  <div class="card"><div class="card-body"><h3>😂 Komedi</h3><p>Eğlenceli olaylar, absürt durumlar ve karakterler arası mizah.</p><span class="tag">Örnek: Spy x Family</span></div></div>
+  <div class="card"><div class="card-body"><h3>🏯 Tarih</h3><p>Geçmiş dönemler, krallıklar, savaşlar ve tarihî esintiler.</p><span class="tag">Örnek: Kingdom</span></div></div>
+  <div class="card"><div class="card-body"><h3>🧠 Psikolojik</h3><p>Karar verme, zihin oyunları, insan davranışları ve ahlaki ikilemler.</p><span class="tag">Örnek: Death Note</span></div></div>
+  <div class="card"><div class="card-body"><h3>🏐 Spor</h3><p>Takım çalışması, rekabet, antrenmanlar ve sportif hedefler.</p><span class="tag">Örnek: Haikyuu!!</span></div></div>
+  <div class="card"><div class="card-body"><h3>🌍 Isekai</h3><p>Bir karakterin başka bir dünyaya gitmesini veya yeniden doğmasını konu alır.</p><span class="tag">Örnek: Re:Zero</span></div></div>
+ </div>
+</section>
+
+<section class="wrap" id="rehber">
+ <h2 class="section-title">Anime Rehberi</h2>
+ <p class="subtitle">Anime kültürü hakkında temel bilgiler.</p>
+ <div class="columns">
+  <div>
+   <article class="article">
+    <h3>Anime nedir?</h3>
+    <p>Anime, Japonya ile özdeşleşmiş animasyon yapımlarını ifade eden bir terimdir. Aksiyon, komedi, romantizm, bilim kurgu, dram ve daha birçok türde eser bulunur.</p>
+    <p>Anime yalnızca çocuklara yönelik değildir. Bazı yapımlar gençlere, bazıları yetişkinlere yönelik temalar ve anlatım biçimleri içerebilir. İzleyicilerin yaş derecelendirmelerini dikkate alması önemlidir.</p>
+   </article>
+   <article class="article">
+    <h3>Manga ve anime arasındaki fark</h3>
+    <p>Manga, Japon çizgi romanı geleneğinin bir parçasıdır. Anime ise hareketli görüntü, ses, müzik ve seslendirme kullanır. Bazı animeler mangalardan uyarlanırken bazıları özgün hikâyeler anlatır.</p>
+    <p>Uyarlamalarda hikâyenin ilerleyişi, bölüm sayısı ve finali kaynak eserden farklı olabilir. Bu yüzden anime ve manganın olay örgüleri her zaman birebir aynı değildir.</p>
+   </article>
+   <article class="article">
+    <h3>Shounen, seinen ve diğer terimler</h3>
+    <p><b>Shounen:</b> Genellikle genç erkek okurlara yönelik pazarlanan eserleri ifade eder; aksiyon ve macera sık görülür.</p>
+    <p><b>Seinen:</b> Genellikle yetişkin erkek okurlara yönelik yayın kategorisidir ve farklı türlerde eserleri kapsar.</p>
+    <p><b>Shoujo:</b> Genellikle genç kız okurlara yönelik pazarlanan eserleri ifade eder.</p>
+    <p><b>Josei:</b> Genellikle yetişkin kadın okurlara yönelik eserlerin yayın kategorisidir.</p>
+    <p>Bu terimler tek başına bir animenin türünü, kalitesini veya herkes için uygunluğunu belirlemez.</p>
+   </article>
+   <article class="article">
+    <h3>Dolgu bölümleri (filler) nedir?</h3>
+    <p>Uzun anime serilerinde kaynak mangada bulunmayan veya ana hikâyeyi geçici olarak takip etmeyen bölümler yer alabilir. Bunlara genellikle filler denir. Bazı izleyiciler bu bölümleri severken bazıları ana hikâyeyi takip etmeyi tercih eder.</p>
+   </article>
+  </div>
+  <aside>
+   <div class="info-box">
+    <h3>Anime izleme ipuçları</h3>
+    <p>• İlk bölümde serinin temel fikrine dikkat et.</p>
+    <p>• İzleme sırasını kontrol et.</p>
+    <p>• Film ve özel bölümlerin yerini araştır.</p>
+    <p>• Spoiler içeren sayfalara dikkat et.</p>
+    <p>• Yaş derecelendirmesini kontrol et.</p>
+   </div>
+   <div class="info-box">
+    <h3>Temel terimler</h3>
+    <p><b>OP:</b> Açılış şarkısı.</p>
+    <p><b>ED:</b> Kapanış şarkısı.</p>
+    <p><b>OVA:</b> Televizyon yayını dışında yayımlanabilen özgün animasyon bölümü.</p>
+    <p><b>Arc:</b> Hikâyenin belirli bir olay örgüsü bölümü.</p>
+    <p><b>Canon:</b> Eserin resmî hikâye sürekliliğinin parçası kabul edilen olaylar.</p>
+    <p><b>Seiyuu:</b> Japon seslendirme sanatçısı.</p>
+   </div>
+  </aside>
+ </div>
+</section>
+
+<section class="wrap" id="tarihce">
+ <h2 class="section-title">Anime Tarihçesi</h2>
+ <p class="subtitle">Japon animasyonunun gelişimindeki önemli dönemler.</p>
+ <div class="timeline">
+  <div class="timeline-item"><h3>1910'lar–1920'ler</h3><p>Japonya'da ilk animasyon deneyleri ve kısa filmler ortaya çıktı. Bu dönem, yerel animasyon üretiminin başlangıç aşamalarını kapsar.</p></div>
+  <div class="timeline-item"><h3>1960'lar</h3><p>Televizyon animasyonları daha geniş kitlelere ulaşmaya başladı. Seri biçiminde animasyon üretimi önem kazandı.</p></div>
+  <div class="timeline-item"><h3>1970'ler</h3><p>Robotlar, bilim kurgu ve macera temaları öne çıktı. Farklı yaş gruplarına yönelik seriler çeşitlendi.</p></div>
+  <div class="timeline-item"><h3>1980'ler</h3><p>Ev videosu pazarının gelişmesiyle OVA yapımları ve farklı anlatım biçimleri yaygınlaştı.</p></div>
+  <div class="timeline-item"><h3>1990'lar</h3><p>Birçok anime uluslararası izleyiciyle buluştu. Televizyon yayınları ve filmler anime kültürünün dünyada tanınmasına katkıda bulundu.</p></div>
+  <div class="timeline-item"><h3>2000'ler</h3><p>Dijital üretim yöntemleri ve internetin yaygınlaşması, animeye erişimi ve hayran topluluklarını değiştirdi.</p></div>
+  <div class="timeline-item"><h3>2010'lar</h3><p>Çevrim içi yayın platformları, uluslararası dağıtım ve çevrim içi topluluklar daha fazla önem kazandı.</p></div>
+  <div class="timeline-item"><h3>2020'ler</h3><p>Küresel yayın hizmetleri, sinema gösterimleri ve dijital hayran toplulukları anime endüstrisinin uluslararası erişimini artırmayı sürdürdü.</p></div>
+ </div>
+</section>
+
+<section class="wrap" id="karsilastirma">
+ <h2 class="section-title">Anime Bilgi Tablosu</h2>
+ <p class="subtitle">Bazı popüler serilere hızlı bakış. Bölüm sayıları ve devam durumları zamanla değişebilir.</p>
+ <div style="overflow-x:auto">
+ <table>
+  <thead><tr><th>Anime</th><th>Ana tema</th><th>Tür</th><th>Başlangıç</th></tr></thead>
+  <tbody>
+   <tr><td>One Piece</td><td>Korsanlar ve keşif</td><td>Macera</td><td>1999</td></tr>
+   <tr><td>Naruto</td><td>Ninja ve dostluk</td><td>Aksiyon</td><td>2002</td></tr>
+   <tr><td>Bleach</td><td>Ruhlar ve savaşlar</td><td>Fantastik</td><td>2004</td></tr>
+   <tr><td>Death Note</td><td>Adalet ve strateji</td><td>Gerilim</td><td>2006</td></tr>
+   <tr><td>Hunter x Hunter</td><td>Keşif ve yetenekler</td><td>Macera</td><td>2011</td></tr>
+   <tr><td>Attack on Titan</td><td>Hayatta kalma</td><td>Dram</td><td>2013</td></tr>
+   <tr><td>Haikyuu!!</td><td>Voleybol</td><td>Spor</td><td>2014</td></tr>
+   <tr><td>Jujutsu Kaisen</td><td>Lanetler ve büyücüler</td><td>Aksiyon</td><td>2020</td></tr>
+   <tr><td>Frieren</td><td>Zaman ve yolculuk</td><td>Fantastik</td><td>2023</td></tr>
+  </tbody>
+ </table>
+ </div>
+</section>
+
+<section class="wrap" id="sozluk">
+ <h2 class="section-title">Anime Sözlüğü</h2>
+ <p class="subtitle">Anime topluluklarında sık karşılaşabileceğin kavramlar.</p>
+ <div class="grid">
+  <div class="info-box"><h3>Power scaling</h3><p>Karakterlerin yeteneklerini ve güç seviyelerini karşılaştırmaya yönelik değerlendirme yöntemi.</p></div>
+  <div class="info-box"><h3>Worldbuilding</h3><p>Bir hikâyenin dünyasının, tarihinin, kültürünün ve kurallarının oluşturulması.</p></div>
+  <div class="info-box"><h3>Character development</h3><p>Karakterin hikâye boyunca kişilik, düşünce ve davranış bakımından değişmesi.</p></div>
+  <div class="info-box"><h3>Soundtrack</h3><p>Anime boyunca kullanılan müziklerin bütünü.</p></div>
+  <div class="info-box"><h3>Adaptasyon</h3><p>Manga, roman veya başka bir eserin anime biçimine uyarlanması.</p></div>
+  <div class="info-box"><h3>Sezon</h3><p>Bir animenin belirli yayın döneminde yayımlanan bölüm grubu.</p></div>
+  <div class="info-box"><h3>Opening</h3><p>Çoğu bölümün başında kullanılan açılış videosu ve şarkısı.</p></div>
+  <div class="info-box"><h3>Ending</h3><p>Çoğu bölümün sonunda kullanılan kapanış videosu ve şarkısı.</p></div>
+  <div class="info-box"><h3>Spin-off</h3><p>Ana eserin bir karakterine veya yan hikâyesine odaklanan ayrı yapım.</p></div>
+ </div>
+</section>
+
+<section class="wrap" id="sss">
+ <h2 class="section-title">Sık Sorulan Sorular</h2>
+ <div class="info-box"><h3>Anime ile çizgi film aynı şey mi?</h3><p>Anime de animasyon türüdür. Ancak Japon yapım gelenekleri, anlatım biçimleri ve kültürel özellikleri nedeniyle ayrı bir kategori olarak ele alınır.</p></div>
+ <div class="info-box"><h3>Bir animeye nereden başlamalıyım?</h3><p>İlgini çeken türe göre seçim yapabilirsin. Macera seviyorsan One Piece, bilim kurgu seviyorsan Steins;Gate, romantizm seviyorsan Horimiya iyi başlangıç seçenekleri olabilir.</p></div>
+ <div class="info-box"><h3>Her anime mangadan mı uyarlanır?</h3><p>Hayır. Bazı animeler mangadan, bazıları romanlardan uyarlanır; bazıları ise doğrudan özgün bir proje olarak hazırlanır.</p></div>
+ <div class="info-box"><h3>Bu sitede arama nasıl çalışıyor?</h3><p>Anime bölümünün üstündeki arama kutusuna seri adını veya açıklamasında geçen bir kelimeyi yaz. Tür butonlarıyla sonuçları daraltabilirsin.</p></div>
+</section>
+
+<section class="wrap">
+ <div class="article">
+  <h2>Anime dünyası keşfedilmeyi bekliyor</h2>
+  <p>Her seri farklı bir dünya, farklı karakterler ve farklı fikirler sunar. Bazı hikâyeler büyük savaşları anlatırken bazıları günlük yaşamın küçük anlarına odaklanır. Bu ansiklopediyi yeni seriler keşfetmek, anime kavramlarını öğrenmek ve sevdiğin yapımlar hakkında fikir edinmek için kullanabilirsin.</p>
+  <a href="#anime" class="button">Anime Listesine Dön ↑</a>
+ </div>
+</section>
+</main>
+
+<footer id="end">
+ <div class="logo">ANIME<span>WIKI</span></div>
+ <p>Anime dünyasını keşfetmek için hazırlanmış örnek ansiklopedi.</p>
+ <p>Bu site bağımsız bir hayran projesi örneğidir; resmî bir anime veri tabanı değildir.</p>
+ <a href="#top" class="button">Başa Git ↑</a>
+ <p style="font-size:12px;margin-top:25px">© 2026 Anime Wiki · HTML, CSS ve JavaScript</p>
+</footer>
+
+<button class="top-button" onclick="location.href='#top'">↑ Başa Git</button>
+
+<script>
+let currentFilter = "Tümü";
+
+function setFilter(filter, button) {
+ currentFilter = filter;
+ document.querySelectorAll("#filters button").forEach(b => b.classList.remove("active"));
+ button.classList.add("active");
+ filterAnime();
+}
+
+function filterAnime() {
+ const query = document.getElementById("search").value.toLocaleLowerCase("tr-TR").trim();
+ const cards = document.querySelectorAll("#animeGrid .card");
+ let visible = 0;
+
+ cards.forEach(card => {
+  const text = (card.innerText + " " + card.dataset.name).toLocaleLowerCase("tr-TR");
+  const matchesSearch = text.includes(query);
+  const matchesFilter = currentFilter === "Tümü" ||
+    text.includes(currentFilter.toLocaleLowerCase("tr-TR"));
+  const show = matchesSearch && matchesFilter;
+  card.classList.toggle("hidden", !show);
+  if (show) visible++;
+ });
+
+ document.getElementById("noResults").classList.toggle("hidden", visible !== 0);
+}
+</script>
 
 </body>
 </html>
+
